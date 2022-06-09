@@ -10,6 +10,7 @@ import LoginScreen from "./screens/Login";
 import RegistrationScreen from "./screens/Registration";
 import OrderHistory from "./screens/OrderHistory";
 import CreditCard from "./screens/CreditCard";
+import SplashScreen from "./screens/SplashScreen";
 
 const store = configureStore();
 
@@ -22,7 +23,8 @@ export default function RootNavigation() {
   return (
     <ReduxProvider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login" screenOptions={screenOptions}>
+        <Stack.Navigator initialRouteName="Splash" screenOptions={screenOptions}>
+          <Stack.Screen name="Splash" component={SplashScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Registration" component={RegistrationScreen} />
           <Stack.Screen name="Home" component={Home} />

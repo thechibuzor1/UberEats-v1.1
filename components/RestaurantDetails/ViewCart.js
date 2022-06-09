@@ -20,8 +20,11 @@ import {
   Ionicons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
+ 
+
 
 export default function ViewCart({ navigation }) {
+ 
   const [modalVisible, setModalVisible] = useState(false);
   const [paystackModal, setPaystackModal] = useState(false);
   const [paymentModal, setPaymentModal] = useState(false);

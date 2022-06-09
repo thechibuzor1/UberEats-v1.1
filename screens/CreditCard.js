@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { StyleSheet, View, Switch } from "react-native";
 import { CreditCardInput, LiteCreditCardInput } from "react-native-input-credit-card";
+
 
 const s = StyleSheet.create({
   switch: {
@@ -23,10 +24,17 @@ const s = StyleSheet.create({
 });
 
 
+
 export default class CreditCard extends Component {
   state = { useLiteCreditCardInput: false };
+  cardNumber = useState("");
+  expiryMonth = useState("");
+  expiryYear = useState("");
+  cvc = useState("");
+  
 
-  _onChange = (formData) => console.log(JSON.stringify(formData, null, " "));
+  _onChange = (formData) => {console.log(JSON.stringify(formData, null, " "))
+   };
   _onFocus = (field) => console.log("focusing", field);
   _setUseLiteCreditCardInput = (useLiteCreditCardInput) => this.setState({ useLiteCreditCardInput });
 
