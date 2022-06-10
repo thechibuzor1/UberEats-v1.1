@@ -11,6 +11,7 @@ import LottieView from "lottie-react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import firebase from "../Firebase";
 import { useDispatch } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function RegistrationScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ export default function RegistrationScreen({ navigation }) {
                 email: email,
               },
             });
-
+            AsyncStorage.setItem("user", JSON.stringify(user));
             navigation.navigate("Home", { user: data });
           })
           .catch((error) => {

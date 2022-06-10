@@ -1,7 +1,11 @@
-import React, { Component, useState } from "react";
-import { StyleSheet, View, Switch } from "react-native";
-import { CreditCardInput, LiteCreditCardInput } from "react-native-input-credit-card";
-
+import React, { useState } from "react";
+import { StyleSheet, View, Switch, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import {
+  CreditCardInput,
+  LiteCreditCardInput,
+} from "react-native-input-credit-card";
+import { useDispatch } from "react-redux";
 
 const s = StyleSheet.create({
   switch: {
@@ -23,60 +27,59 @@ const s = StyleSheet.create({
   },
 });
 
+export default function CreditCard({ navigation }) {
+  const dispatch = useDispatch();
+  const [form, setForm] = useState({});
+  const onFocus = (field) => console.log("focusing", field);
+  const onChange = (formData) => {
+    formData.valid ? setForm(formData) : setForm({});
 
+    /* setForm(JSON.stringify(formData, null, " "));
+    console.log(JSON.stringify(formData, null, " "));
+    console.log("blahbshb");*/
+    console.log(form);
+  };
+  const submitCard = () => {
+    dispatch({
+      type: "ADD_CREDITCARD",
+      payload: {
+        form: form,
+      },
+    });
+    navigation.navigate("Home");
+  };
 
-export default class CreditCard extends Component {
-  state = { useLiteCreditCardInput: false };
-  cardNumber = useState("");
-  expiryMonth = useState("");
-  expiryYear = useState("");
-  cvc = useState("");
-  
-
-  _onChange = (formData) => {console.log(JSON.stringify(formData, null, " "))
-   };
-  _onFocus = (field) => console.log("focusing", field);
-  _setUseLiteCreditCardInput = (useLiteCreditCardInput) => this.setState({ useLiteCreditCardInput });
-
-  render() {
-    return (
-      <View style={s.container}>
-        <Switch
-          style={s.switch}
-          onValueChange={this._setUseLiteCreditCardInput}
-          value={this.state.useLiteCreditCardInput} />
-
-        { this.state.useLiteCreditCardInput ?
-          (
-            <LiteCreditCardInput
-              autoFocus
-              inputStyle={s.input}
-
-              validColor={"black"}
-              invalidColor={"red"}
-              placeholderColor={"darkgray"}
-
-              onFocus={this._onFocus}
-              onChange={this._onChange} />
-          ) : (
-            <CreditCardInput
-              autoFocus
-
-              requiresName
-              requiresCVC
-              requiresPostalCode
-
-              labelStyle={s.label}
-              inputStyle={s.input}
-              validColor={"black"}
-              invalidColor={"red"}
-              placeholderColor={"darkgray"}
-
-              onFocus={this._onFocus}
-              onChange={this._onChange} />
-          )
-        }
-      </View>
-    );
-  }
+  return (
+    <View style={s.container}>
+      <LiteCreditCardInput
+        autoFocus
+        inputStyle={s.input}
+        validColor={"black"}
+        invalidColor={"red"}
+        placeholderColor={"darkgray"}
+        onFocus={onFocus}
+        onChange={onChange}
+      />
+      <TouchableOpacity
+        onPress={() => {
+          submitCard();
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: "green",
+            marginLeft: 30,
+            marginRight: 30,
+            marginTop: 20,
+            height: 48,
+            borderRadius: 5,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: 16 }}>Submit</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
 }

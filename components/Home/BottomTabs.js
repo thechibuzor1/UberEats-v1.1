@@ -24,7 +24,7 @@ export default function BottomTabs({ navigation }) {
       <TouchableOpacity onPress={() => navigation.navigate("Orders")}>
         <Icon icon="receipt" text="Orders" />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("account")}>
         <Icon icon="user" text="Account" />
       </TouchableOpacity>
     </View>

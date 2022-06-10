@@ -11,6 +11,7 @@ import firebase from "../Firebase";
 import LottieView from "lottie-react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -40,15 +41,18 @@ export default function LoginScreen({ navigation }) {
             }
             const user = firestoreDocument.data();
             setLoading(false);
-             dispatch({
+            dispatch({
               type: "LOG_IN",
               payload: {
                 userId: user.id,
                 name: user.fullName,
-                email:user.email,
+                email: user.email,
               },
-            }); 
-            console.log(user)
+            });
+            console.log(user);
+            AsyncStorage.setItem("user", JSON.stringify(user));
+            setEmail("");
+            setPassword("");
             navigation.navigate("Home", { user });
           })
           .catch((error) => {

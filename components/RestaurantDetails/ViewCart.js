@@ -20,11 +20,8 @@ import {
   Ionicons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
- 
-
 
 export default function ViewCart({ navigation }) {
- 
   const [modalVisible, setModalVisible] = useState(false);
   const [paystackModal, setPaystackModal] = useState(false);
   const [paymentModal, setPaymentModal] = useState(false);
@@ -237,6 +234,7 @@ export default function ViewCart({ navigation }) {
   };
 
   const paymentModalContent = () => {
+    const { valid, values } = useSelector((state) => state.cardReducer.val);
     return (
       <>
         <View style={styles.modalContainer}>
@@ -250,10 +248,18 @@ export default function ViewCart({ navigation }) {
                 }}
               >
                 <View style={{ flexDirection: "row" }}>
-                  <AntDesign name="plus" size={22} color="black" />
-                  <Text style={{ fontSize: 17, fontWeight: "500" }}>
-                    Add creditCard
-                  </Text>
+                  {valid ? (
+                    <Text style={{ fontSize: 17, fontWeight: "500" }}>
+                      {values.number}
+                    </Text>
+                  ) : (
+                    <>
+                      <AntDesign name="plus" size={22} color="black" />
+                      <Text style={{ fontSize: 17, fontWeight: "500" }}>
+                        Add creditCard
+                      </Text>
+                    </>
+                  )}
                 </View>
               </TouchableOpacity>
               <Divider width={1.8} style={{ marginVertical: 20 }} />
