@@ -12,6 +12,7 @@ import OrderHistory from "./screens/OrderHistory";
 import CreditCard from "./screens/CreditCard";
 import SplashScreen from "./screens/SplashScreen";
 import Account from "./screens/Account";
+import EditAccount from "./screens/EditAccount";
 
 const store = configureStore();
 
@@ -34,6 +35,7 @@ export default function RootNavigation() {
           <Stack.Screen name="OrderCompleted" component={OrderCompleted} />
           <Stack.Screen name="Card" component={CreditCard} />
           <Stack.Screen name="account" component={Account} />
+          <Stack.Screen name="edit" component={EditAccount} />
         </Stack.Navigator>
       </NavigationContainer>
     </ReduxProvider>

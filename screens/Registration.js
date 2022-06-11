@@ -56,8 +56,8 @@ export default function RegistrationScreen({ navigation }) {
                 email: email,
               },
             });
-            AsyncStorage.setItem("user", JSON.stringify(user));
-            navigation.navigate("Home", { user: data });
+            AsyncStorage.setItem("user", JSON.stringify(data));
+            navigation.navigate("Home", { data });
           })
           .catch((error) => {
             alert(error);
@@ -66,6 +66,7 @@ export default function RegistrationScreen({ navigation }) {
           });
       })
       .catch((error) => {
+        setLoading(false);
         alert(error);
         navigation.navigate("Registration");
       });

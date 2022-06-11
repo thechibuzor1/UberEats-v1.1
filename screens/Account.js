@@ -20,6 +20,21 @@ export default function Account({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View
+        style={{
+          margin: 15,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: "bold",
+          }}
+        >
+          Account
+        </Text>
+      </View>
+      <Divider width={1} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <TouchableOpacity>
           <View
@@ -53,7 +68,7 @@ export default function Account({ navigation }) {
             </Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("edit")}>
           <View
             style={{
               margin: 15,

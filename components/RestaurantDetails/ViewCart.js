@@ -26,12 +26,7 @@ export default function ViewCart({ navigation }) {
   const [paystackModal, setPaystackModal] = useState(false);
   const [paymentModal, setPaymentModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [Fullname, setFullame] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+   
 
   const { items, restaurantName } = useSelector(
     (state) => state.cartReducer.selectedItems
@@ -44,24 +39,16 @@ export default function ViewCart({ navigation }) {
     style: "currency",
     currency: "USD",
   });
+  const { name, email,  } = useSelector((state) => state.userReducer.userInfo);
 
   const addOrderToFireBase = () => {
     setLoading(true);
     const db = firebase.firestore();
-    db.collection("userData").add({
-      Name: Fullname,
-      Address: address,
-      Phone: phone,
-      Email: email,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
     db.collection("orders")
       .add({
         items: items,
         restaurantName: restaurantName,
-        Name: Fullname,
-        Address: address,
-        Phone: phone,
+        Name: name,
         Email: email,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       })
@@ -281,7 +268,7 @@ export default function ViewCart({ navigation }) {
   };
 
   const paystackModalContent = () => {
-    const { name, email } = useSelector((state) => state.userReducer.userInfo);
+    
     return (
       <>
         <View style={styles.modalContainer}>

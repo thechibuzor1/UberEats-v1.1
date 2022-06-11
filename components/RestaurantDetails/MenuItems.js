@@ -57,8 +57,6 @@ export default function MenuItems({
   const isFoodInCart = (food, cartItems) =>
     Boolean(cartItems.find((item) => item.title === food.title));
 
-  const [foodModal, setFoodModal] = useState(false);
-
   const { items } = useSelector((state) => state.cartReducer.selectedItems);
 
   const add = (item, checkboxValue) => {
@@ -170,10 +168,9 @@ export default function MenuItems({
                 <BouncyCheckbox
                   iconStyle={{ borderColor: "lightgray", borderRadius: 0 }}
                   fillColor="green"
-                  onPress={(checkboxValue) => {
-                    selectItem(food, checkboxValue, 1);
-                    setFoodModal(true);
-                  }}
+                  onPress={(checkboxValue) =>
+                    selectItem(food, checkboxValue, 1)
+                  }
                   isChecked={isFoodInCart(food, cartItems)}
                 />
               )}

@@ -49,7 +49,6 @@ export default function LoginScreen({ navigation }) {
                 email: user.email,
               },
             });
-            console.log(user);
             AsyncStorage.setItem("user", JSON.stringify(user));
             setEmail("");
             setPassword("");
